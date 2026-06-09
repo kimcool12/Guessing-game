@@ -4,6 +4,10 @@ let number = Math.floor(Math.random() * 20) + 1;
 let score = 20;
 let HighScore = 0;
 
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 // --- CHECK BUTTON EVENT LISTENER ---
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -11,12 +15,17 @@ document.querySelector('.check').addEventListener('click', function () {
 
   // WHEN PLAYER INPUTS AN INVALID NUMBER
   if (!guess) {
-    document.querySelector('.message').textContent =
-      '...Please enter a valide number.✖️';
+    // document.querySelector('.message').textContent =
+    //   '...Please enter a valide number.✖️';
+
+    displayMessage('...Please enter a valide number.✖️');
   }
   // WHEN THE PLAYER GUESSES THE RIGHT NUMBER
   else if (guess === number) {
-    document.querySelector('.message').textContent = 'Correct Number!🎉';
+    // document.querySelector('.message').textContent = 'Correct Number!🎉';
+
+    displayMessage('Correct Number!🎉');
+
     document.querySelector('.number').textContent = number;
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
@@ -28,12 +37,18 @@ document.querySelector('.check').addEventListener('click', function () {
     // when the guess is not correct
   } else if (guess !== number) {
     if (score > 1) {
-      document.querySelector('.message').textContent =
-        guess > number ? 'Too high 📉 , Go lower' : 'Too Low 📉 , Go higher';
+      // document.querySelector('.message').textContent =
+      //   guess > number ? 'Too high 📉 , Go lower' : 'Too Low 📉 , Go higher';
+
+      displayMessage(
+        guess > number ? 'Too high 📉 , Go lower' : 'Too Low 📉 , Go higher',
+      );
+
       score -= 1;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = 'You lose😔';
+      displayMessage('You lose😔');
+      // document.querySelector('.message').textContent = 'You lose😔';
       document.querySelector('.score').textContent = 0;
     }
   }
@@ -67,7 +82,9 @@ document.querySelector('.again').addEventListener('click', function () {
   score = 20;
 
   document.querySelector('.score').textContent = score;
-  document.querySelector('.message').textContent = 'Start guessing';
+  // document.querySelector('.message').textContent = 'Start guessing';
+  displayMessage('Start guessing');
+
   document.querySelector('.number').style.width = '15rem';
 
   document.querySelector('.message').style.color = '#60b347';
